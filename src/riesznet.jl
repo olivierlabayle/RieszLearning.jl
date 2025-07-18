@@ -1,16 +1,11 @@
-mutable struct RieszNetModel <: MLJBase.Unsupervised
+mutable struct RieszNetModel <: MLJBase.Deterministic
     lux_model
     hyper_parameters
 end
 
-RieszNetModel(;lux_model, hyper_parameters) = RieszNetModel(lux_model, hyper_parameters)
+RieszNetModel(;lux_model=MLP([2, 8]), hyper_parameters=()) = RieszNetModel(lux_model, hyper_parameters)
 
 MLJBase.input_scitype(::Type{<:RieszNetModel}) = Tuple{MLJBase.Table(MLJBase.Continuous), Any}
-
-"""
-To trick the MLJBase machinery and pass information on treatments at run time.
-"""
-MLJBase.target_in_fit(::Type{<:RieszNetModel}) = true
 
 function MLJBase.predict(lux_model::RieszNetModel, fitresult, X)
     T, W = X
@@ -186,4 +181,26 @@ function train_lux_model(lux_model, T, W, indicators;
     cache = nothing
     report = (train_losses=train_losses, val_losses=val_losses, best_epoch=best_epoch)
     return fitresult, cache, report
+end
+
+"""
+    MLP(sizes; activation=relu)
+
+Builds a simple MLP model with the given hidden sizes. The last layer has a single output which must not be given.
+
+Example usage:
+
+```julia
+model = MLP([9, 32, 8]; activation=relu)
+```
+
+The model has an input size of 9, two hidden layers with sizes 32 and 8, and a single output layer.
+
+"""
+function MLP(sizes; activation=relu)
+    hidden_layers = [Dense(sizes[i], sizes[i+1], activation) for i in 1:length(sizes)-1]
+    Chain(
+        hidden_layers...,
+        Dense(sizes[end], 1)
+    )
 end
