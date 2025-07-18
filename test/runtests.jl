@@ -1,6 +1,8 @@
 using RieszLearning
 using Test
 
+TESTDIR = joinpath(pkgdir(RieszLearning), "test")
+
 @testset "RieszLearning.jl" begin
-    # Write your tests here.
+    @test include(joinpath(TESTDIR, "riesznet.jl"))
 end

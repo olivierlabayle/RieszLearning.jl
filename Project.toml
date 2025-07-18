@@ -3,7 +3,29 @@ uuid = "a0bf4b8b-e406-4596-8317-f128bc1688be"
 authors = ["Olivier Labayle <olabayle@gmail.com> and contributors"]
 version = "0.0.0-DEV"
 
+[deps]
+CategoricalArrays = "324d7699-5711-5eae-9e2f-1d82baa6b597"
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+Lux = "b2108857-7c20-44ae-9111-449ecde12c47"
+MLJBase = "a7f614a8-145f-11e9-1d2a-a57a1082229d"
+MLUtils = "f1d291b0-491e-4a28-83b9-f70985020b54"
+OneHotArrays = "0b1bfda6-eb8a-41d2-88d8-f5af5cad476f"
+Optimisers = "3bd65402-5787-11e9-1adc-39752487f4e2"
+Printf = "de0858da-6303-5e67-8744-51eddeeeb8d7"
+Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
+Zygote = "e88e6eb3-aa80-5325-afca-941959d7151f"
+
 [compat]
+CategoricalArrays = "0.10.8"
+DataFrames = "1.7.0"
+Lux = "1.16.0"
+MLJBase = "1.8.1"
+MLUtils = "0.4.8"
+OneHotArrays = "0.2.10"
+Optimisers = "0.4.6"
+Printf = "1.11.0"
+Random = "1.11.0"
+Zygote = "0.7.10"
 julia = "1"
 
 [extras]
